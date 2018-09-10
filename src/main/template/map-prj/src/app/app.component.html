@@ -1,0 +1,73 @@
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-xs-6">
+      <h1>
+        {{title}}
+      </h1>
+
+    </div>
+    <div class="col-xs-6 float-right">
+      <button class="btn btn-lg btn-outline-primary" (click)="open(content)" *ngIf="fileSelected">Launch statistic modal</button>
+    </div>
+
+
+  </div>
+
+  <div>
+
+    <div class="form-group">
+      <label for="file">Choose File</label>
+      <input type="file"
+             id="file"
+             accept=".osm"
+             (change)="handleFileInput($event.target.files)">
+    </div>
+
+    <div id="map" class="google-map"></div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">STATISTICAL VALUES</h4>
+    <button type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <br>
+        google Alle Places : {{numberOfGooglePlaces}} <br>
+        open Alle Places : {{numberOfOpenPlaces}}  <br>
+        open richtig Abgebildet : {{numberOfOpenPlaces - numberOfFalseOpen}}  <br>
+        open falsch Abgebildet : {{numberOfFalseOpen}} <br>
+      </div>
+
+      <fusioncharts
+        [width]="width"
+        [height]="height"
+        [type]="type"
+        [dataFormat]="dataFormat"
+        [dataSource]="dataSourceGoogle">
+      </fusioncharts>
+
+      <fusioncharts
+        [width]="width"
+        [height]="height"
+        [type]="type"
+        [dataFormat]="dataFormat"
+        [dataSource]="dataSource">
+      </fusioncharts>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Close</button>
+  </div>
+</ng-template>
+

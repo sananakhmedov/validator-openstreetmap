@@ -1,0 +1,1 @@
+kill -9 $(lsof -t -i:7090 -sTCP:LISTEN) & kill -9 $(lsof -t -i:4210 -sTCP:LISTEN)

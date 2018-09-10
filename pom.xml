@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>open-map-validator</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>open-map-validator</name>
+    <description>Demo project for Spring Boot</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>http://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <version>1.5.9.RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>${jsonsimple.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.javadocmd</groupId>
+            <artifactId>simplelatlng</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>info.debatty</groupId>
+            <artifactId>java-string-similarity</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.google.maps/google-maps-services -->
+        <dependency>
+            <groupId>com.google.maps</groupId>
+            <artifactId>google-maps-services</artifactId>
+            <version>${googlemaps.version}</version>
+        </dependency>
+
+
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency> -->
+
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commonsio.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--<dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <properties>
+        <org.springframework.version>3.0.0.RELEASE</org.springframework.version>
+        <lombok.version>1.16.20</lombok.version>
+        <jsonsimple.version>1.1</jsonsimple.version>
+        <mybatis.version>3.4.6</mybatis.version>
+        <gson.version>2.8.2</gson.version>
+        <guava.version>25.1-jre</guava.version>
+        <commonsio.version>2.6</commonsio.version>
+        <googlemaps.version>0.2.9</googlemaps.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <googlemap.key>AIzaSyACdtQgb0MC6J8wS-IagDW2YIPAeDakkmM</googlemap.key>
+        <googlemap.recoverykey>AIzaSyB3juajX9XgIufeRCrOwpY1WRixHMQ9HSk</googlemap.recoverykey>
+        <googlemap.thirdkey>AIzaSyDFg2A7P8YnCYzhHt9CO5E4DCHHkjVePFg</googlemap.thirdkey>
+        <foursquare.clientid>DS3UCNSA5DYQDE12CL2ST1OBHSOICBD4XLYI244AKG1ILGR5</foursquare.clientid>
+        <foursquare.clientsecret>TRG0NPZTH5EC1PLTAWI2214TAJEWG5C1XXESOSSUSASNP2M1</foursquare.clientsecret>
+        <microsoftmap.key>AlzLUTrsExYFb8algpyYPpDinKt_T3exD59iO7JsOt8GxTyleygsmqMZeU1pTIpQ</microsoftmap.key>
+        <osm.database.name>map-db</osm.database.name>
+        <similarity.score>0.65</similarity.score>
+        <similarity.algorithm>JaroWinkler</similarity.algorithm>
+        <!--
+            ## VALID ALGORITHMS DEFAULT JAROWINKLER ##
+            JaroWinkler
+            Levenshtein
+            Jaccard
+        -->
+    </properties>
+
+</project>
