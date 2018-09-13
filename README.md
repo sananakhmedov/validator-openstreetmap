@@ -5,6 +5,22 @@ san-map
 * npm command should be defined as environment variable
 npm start
 * osm2plsql is already inside of project but for windows
+
+
+windows postgis bundle
+http://download.osgeo.org/postgis/windows/pg10/
+ 
+for mac
+brew install postgis
+
+psql -U postgres
+CREATE DATABASE "map-database";
+
+\c map-database;
+
+CREATE EXTENSION postgis; CREATE EXTENSION hstore;
+
+
  - http://download.osgeo.org/postgis/windows/pg10/ postgis should be installed
     and "CREATE EXTENSION postgis; CREATE EXTENSION hstore;" those extensions should be
     run inside of "map-db" database.
@@ -18,5 +34,5 @@ first start spring application from OpenMapValidatorApplication.java
 then start ui from path open-map-validator/src/main/template/map-prj with command "ng serve"
 you need maybe npm install
 
-- backend url path - localhost:8090
-- ui path - localhost:4210
+- backend url path - localhost:7090
+- ui path - localhost:4220

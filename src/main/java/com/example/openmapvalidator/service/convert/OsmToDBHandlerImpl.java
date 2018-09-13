@@ -11,13 +11,13 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.concurrent.Executors;
 
 /**
  * @author Sanan.Ahmadzada
  */
 @Repository
-@SessionScope
 public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OsmToDBHandlerImpl.class);
@@ -59,18 +59,27 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
 
             //builder.directory(new ClassPathResource("map").getFile());
-            builder.directory(new File(System.getProperty("user.dir")));
+            //builder.directory(new File(System.getProperty("user.dir")));
 
             if (isWindows) {
                 OSM_ROOT = Const.OSM_WINDOWS_ROOT;
 
                 String path = root + OSM_ROOT;
 
-                String command = path + File.separator + Const.OSM_COMMAND + ".exe";
+                //String command = path + File.separator + Const.OSM_COMMAND + ".exe";
+                String command = path + File.separator + Const.OSM_COMMAND;
                 LOGGER.info("command path is : {}", command);
 
 
-                builder.command(command, "--create", "--database", "map-db", fileNameWithPath);
+                //builder.command(command, "--create", "--database", "map-db", fileNameWithPath);
+
+                String commandWin = command + " --create --username=postgres --database=map-database " +
+                        " -S " + stylePath + Const.SPACE + fileNameWithPath;
+                LOGGER.info("command win {}", commandWin);
+
+                process = Runtime.getRuntime().exec(commandWin, null, new File(path));
+
+                process.waitFor();
 
             } else {
 
@@ -78,20 +87,24 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
                 String path = root + OSM_ROOT;
 
+                builder.directory(new File(path));
+
                 String command = path + File.separator + Const.OSM_COMMAND;
                 LOGGER.info("command path is : {}", command);
 
 
                 //builder.command(command, "--create", "--database", "map-db", fileNameWithPath);
-                builder.command("osm2pgsql", "--create", "--database", "map-db", fileNameWithPath);
+                builder.command(command, "--create", "--database", "map-databas", "-S", stylePath,
+                        fileNameWithPath);
 
+                process = builder.start();
 
             }
 
+            LOGGER.info("command: {}", Arrays.toString(builder.command().toArray()));
 
             LOGGER.debug("------");
 
-            process = builder.start();
             StreamGobbler streamGobbler =
                     new StreamGobbler(process.getInputStream(), System.out::println);
             Executors.newSingleThreadExecutor().submit(streamGobbler);

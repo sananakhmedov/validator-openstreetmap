@@ -9,7 +9,7 @@
             <dataSource type="POOLED">
                 <property name="driver" value="org.postgresql.Driver" />
                 <property name="url"
-                          value="jdbc:postgresql://localhost:5432/map-db" />
+                          value="jdbc:postgresql://localhost:5432/map-databas" />
                 <property name="username" value="postgres" />
                 <property name="password" value="" />
             </dataSource>
