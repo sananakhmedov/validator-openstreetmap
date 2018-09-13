@@ -35,4 +35,4 @@ then start ui from path open-map-validator/src/main/template/map-prj with comman
 you need maybe npm install
 
 - backend url path - localhost:7090
-- ui path - localhost:4220
+- ui path - localhost:4210
