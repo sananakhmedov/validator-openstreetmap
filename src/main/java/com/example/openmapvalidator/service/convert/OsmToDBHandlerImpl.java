@@ -73,7 +73,7 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
                 //builder.command(command, "--create", "--database", "map-db", fileNameWithPath);
 
-                String commandWin = command + " --create --username=postgres --database=map-database " +
+                String commandWin = command + " --create --username=postgres --database=map-db " +
                         " -S " + stylePath + Const.SPACE + fileNameWithPath;
                 LOGGER.info("command win {}", commandWin);
 
@@ -94,7 +94,7 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
 
                 //builder.command(command, "--create", "--database", "map-db", fileNameWithPath);
-                builder.command(command, "--create", "--database", "map-databas", "-S", stylePath,
+                builder.command(command, "--create", "--database", "map-db", "-S", stylePath,
                         fileNameWithPath);
 
                 process = builder.start();

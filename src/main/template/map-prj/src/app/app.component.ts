@@ -29,64 +29,67 @@ export class AppComponent implements OnInit {
   height = 400;
   type = 'pie3d';
   dataFormat = 'json';
-  dataSourceGoogle = {
-    "chart": {
-      "caption": "Openstreetmap places names mapping",
-      "subcaption": "Comparing to Google Maps Places",
-      "startingangle": "120",
-      "showlabels": "1",
-      "showlegend": "1",
-      "enablemultislicing": "0",
-      "slicingdistance": "15",
-      "showpercentvalues": "1",
-      "showpercentintooltip": "1",
-      "plottooltext": "Age group : $label Total visit : $datavalue",
-      "theme": "ocean"
-    },
-    "data": [
-      {
-        "label": "Google Alle Places",
-        "value": this.numberOfGooglePlaces,
-        "color": "#3ADF00"
-      },
-      {
-        "label": "Openstreet Alle Places",
-        "value": this.numberOfOpenPlaces,
-        "color": "#A9F5F2"
-      }
-    ]
-  };
-
-  dataSource = {
-    "chart": {
-      "caption": "Openstreetmap places names mapping",
-      "subcaption": "Comparing to Google Maps Places",
-      "startingangle": "120",
-      "showlabels": "1",
-      "showlegend": "1",
-      "enablemultislicing": "0",
-      "slicingdistance": "15",
-      "showpercentvalues": "1",
-      "showpercentintooltip": "1",
-      "plottooltext": "Age group : $label Total visit : $datavalue",
-      "theme": "ocean"
-    },
-    "data": [
-      {
-        "label": "Openstreet Richtig abgebildet",
-        "value": this.numberOfOpenPlaces - this.numberOfFalseOpen,
-        "color": "#3ADF00"
-      },
-      {
-        "label": "Openstreet Falsch abgebildet",
-        "value": this.numberOfFalseOpen,
-        "color": "#FF0000"
-      }
-    ]
-  };
+  dataSourceGoogle;
+  dataSource;
 
   constructor(private demoService: DemoService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal) {
+    this.dataSourceGoogle = {
+      "chart": {
+        "caption": "Openstreetmap places names mapping",
+        "subcaption": "Comparing to Google Maps Places",
+        "startingangle": "120",
+        "showlabels": "1",
+        "showlegend": "1",
+        "enablemultislicing": "0",
+        "slicingdistance": "15",
+        "showpercentvalues": "1",
+        "showpercentintooltip": "1",
+        "plottooltext": "Age group : $label Total visit : $datavalue",
+        "theme": "ocean"
+      },
+      "data": [
+        {
+          "label": "Google Alle Places",
+          "value": this.numberOfGooglePlaces,
+          "color": "#3ADF00"
+        },
+        {
+          "label": "Openstreet Alle Places",
+          "value": this.numberOfOpenPlaces,
+          "color": "#A9F5F2"
+        }
+      ]
+    };
+
+    this.dataSource = {
+      "chart": {
+        "caption": "Openstreetmap places names mapping",
+        "startingangle": "120",
+        "showlabels": "1",
+        "showlegend": "1",
+        "enablemultislicing": "0",
+        "slicingdistance": "15",
+        "showpercentvalues": "1",
+        "showpercentintooltip": "1",
+        "plottooltext": "Age group : $label Total visit : $datavalue",
+        "theme": "ocean"
+      },
+      "data": [
+        {
+          "label": "Openstreet Richtig abgebildet",
+          "value": this.numberOfOpenPlaces - this.numberOfFalseOpen,
+          "color": "#3ADF00"
+        },
+        {
+          "label": "Openstreet Falsch abgebildet",
+          "value": this.numberOfFalseOpen,
+          "color": "#FF0000"
+        }
+      ]
+    };
+
+  }
 
   private isEmpty(obj) {
     for(var key in obj) {
@@ -115,6 +118,16 @@ export class AppComponent implements OnInit {
   }
 
   afterStatistic() {
+    /*this.numberOfGooglePlaces = 60;
+    this.numberOfOpenPlaces = 40;
+
+    this.dataSourceGoogle.data[0].value = this.numberOfGooglePlaces;
+    this.dataSourceGoogle.data[1].value = this.numberOfOpenPlaces;
+
+    this.dataSource.data[0].value = this.numberOfOpenPlaces - this.numberOfFalseOpen;
+    console.info("false open after statistic : " + this.numberOfFalseOpen);
+    this.dataSource.data[1].value = this.numberOfFalseOpen;
+*/
     if (this.statisticData.hasOwnProperty('numOfGooglePlaces')) {
       this.numberOfGooglePlaces = this.statisticData["numOfGooglePlaces"];
       this.numberOfOpenPlaces = this.statisticData["numOfOpenstreetMapPlaces"];

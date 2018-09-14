@@ -12,7 +12,6 @@
       <button class="btn btn-lg btn-outline-primary" (click)="open(content)" *ngIf="fileSelected">Launch statistic modal</button>
     </div>
 
-
   </div>
 
   <div>
@@ -49,6 +48,7 @@
       </div>
 
       <fusioncharts
+        [id]="chart1"
         [width]="width"
         [height]="height"
         [type]="type"
@@ -57,6 +57,7 @@
       </fusioncharts>
 
       <fusioncharts
+        [id]="chart2"
         [width]="width"
         [height]="height"
         [type]="type"
