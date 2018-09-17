@@ -9,8 +9,10 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.concurrent.Executors;
 
@@ -30,6 +32,7 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
     }
 
 
+    // TODO check if it is okay to handle it in thread
     public void handle(String fileName) {
 
         long begin = System.currentTimeMillis();
@@ -97,7 +100,15 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
                 builder.command(command, "--create", "--database", "map-db", "-S", stylePath,
                         fileNameWithPath);
 
-                process = builder.start();
+                String[] args = new String[] {command, "--create", "--database", "map-db", "-S", stylePath, fileNameWithPath};
+                Process proc = new ProcessBuilder(args).start();
+
+                //String output = executeCommand(command + " --create --database map-db -S " + stylePath + " " +
+                 //       fileNameWithPath + " &");
+
+                //LOGGER.info("output: {}", output);
+
+                //process = builder.start();
 
             }
 
@@ -105,7 +116,7 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
             LOGGER.debug("------");
 
-            StreamGobbler streamGobbler =
+            /*StreamGobbler streamGobbler =
                     new StreamGobbler(process.getInputStream(), System.out::println);
             Executors.newSingleThreadExecutor().submit(streamGobbler);
             int exitCode = process.waitFor();
@@ -113,7 +124,7 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
             long end = System.currentTimeMillis();
 
-            LOGGER.info("end osm command runtime in ms : {}", end - begin);
+            LOGGER.info("end osm command runtime in ms : {}", end - begin);*/
 
         } catch (IOException e) {
             System.out.println("exception happened - here's what I know: ");
@@ -123,8 +134,35 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            process.destroy();
+//            process.destroy();
         }
+    }
+
+    private String executeCommand(String command) {
+
+        StringBuffer output = new StringBuffer();
+
+        Process p = null;
+        try {
+            p = Runtime.getRuntime().exec(command);
+            p.waitFor();
+            BufferedReader reader =
+                    new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+            String line = "";
+            while ((line = reader.readLine())!= null) {
+                output.append(line + "\n");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            LOGGER.info("destroy");
+            p.destroyForcibly();
+        }
+
+        return output.toString();
+
     }
 
 }
