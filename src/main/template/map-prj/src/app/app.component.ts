@@ -21,6 +21,8 @@ export class AppComponent implements OnInit {
 
   closeResult: string;
 
+  boolValue: boolean = false;
+
   numberOfGooglePlaces;
   numberOfOpenPlaces;
   numberOfFalseOpen;
@@ -138,6 +140,8 @@ export class AppComponent implements OnInit {
       this.dataSource.data[0].value = this.numberOfOpenPlaces - this.numberOfFalseOpen;
       console.info("false open after statistic : " + this.numberOfFalseOpen);
       this.dataSource.data[1].value = this.numberOfFalseOpen;
+
+      this.boolValue = false;
     }
   }
 
@@ -255,6 +259,8 @@ export class AppComponent implements OnInit {
       alert('Please dont use ampersand for the name of file, upload new file!');
       return;
     }
+
+    this.boolValue = true;
 
     this.demoService.upload(this.fileToUpload).subscribe(
       // the first argument is a function which runs on success

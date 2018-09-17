@@ -58,6 +58,7 @@ public class MicrosoftResult extends RequestModel {
 
     @Data
     public static class BusinessInfo {
+        private String nameOfParentTransportHub;
         private String entityName;
         private String url;
         private String phone;

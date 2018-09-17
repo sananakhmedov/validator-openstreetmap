@@ -41,15 +41,15 @@ public class SimilarityCheckHandler {
                        String microsoftPlaceName) {
 
         LOGGER.debug("\n" + "*******COMPARE************");
-        LOGGER.debug("{} -> {}", Const.OPENSTREET, node.getName());
-        LOGGER.debug("{} -> {}", Const.GOOGLE, nameResultFromGooglePlace);
-        LOGGER.debug("{} -> {}", Const.FOURSQUARE, foursquareName);
-        LOGGER.debug("{} -> {}", Const.MICROSOFT, microsoftPlaceName);
+        LOGGER.debug(node.getOsm_id() + " {} -> {}", Const.OPENSTREET, node.getName());
+        LOGGER.debug(node.getOsm_id() + " {} -> {}", Const.GOOGLE, nameResultFromGooglePlace);
+        LOGGER.debug(node.getOsm_id() + " {} -> {}", Const.FOURSQUARE, foursquareName);
+        LOGGER.debug(node.getOsm_id() + " {} -> {}", Const.MICROSOFT, microsoftPlaceName);
 
         LOGGER.debug("*********FINISH**************" + "\n");
 
         double similarity = similarityStrategyContext.executeStrategy(node.getName(), nameResultFromGooglePlace);
-        LOGGER.info("******* similarity : {}", similarity);
+        LOGGER.info(node.getOsm_id() + " ******* similarity : {}", similarity);
 
         return similarity < Double.valueOf(configurationService.getSIMILARITY_SCORE());
     }

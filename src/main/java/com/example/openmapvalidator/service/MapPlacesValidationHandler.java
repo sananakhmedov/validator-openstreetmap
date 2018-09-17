@@ -89,9 +89,9 @@ public class MapPlacesValidationHandler {
 
                 LOGGER.debug("Id: {} & Name: {}", model.getOsm_id(), model.getName());
 
-                executorService.execute(() -> {
-                    nameMap.putAll(makeApiCallForPlaceToCompare(model));
-                });
+                //executorService.execute(() -> {
+                //    nameMap.putAll(makeApiCallForPlaceToCompare(model));
+                //});
             }
 
             executorService.shutdown();

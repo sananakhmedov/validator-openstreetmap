@@ -7,6 +7,8 @@ import {DemoService} from "./app.service";
 import {HttpClientModule} from "@angular/common/http";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
+import {AtomSpinnerModule} from 'angular-epic-spinners'
+
 // Import FusionCharts library and chart modules
 // Load FusionCharts
 
@@ -32,7 +34,8 @@ FusionChartsModule.fcRoot(FusionCharts, pie3d);
     HttpClientModule,
     NgbModule.forRoot(),
     // Specify FusionChartsModule as import
-    FusionChartsModule
+    FusionChartsModule,
+    AtomSpinnerModule
   ],
   providers: [
     DemoService
