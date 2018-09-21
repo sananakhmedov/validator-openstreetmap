@@ -1,11 +1,27 @@
-# map
-san-map
---prerequisites
-* postgresql service should be active
-* npm command should be defined as environment variable
-npm start
-* osm2plsql is already inside of project but for windows
+# Project Title
 
+This project aims to validate openstreetMap places data by comparing with google places and other providers data.
+
+## Getting Started
+
+Exported osm map parts can be integrated into our application in order to validate places inside of it and make a
+statistical analyse with them.
+
+![](https://user-images.githubusercontent.com/43131798/45900946-eb72d080-bde9-11e8-9336-dd5f56dae148.PNG)
+
+![](https://user-images.githubusercontent.com/43131798/45900963-f463a200-bde9-11e8-8b4e-fce3c9f48c73.PNG)
+
+
+### Prerequisites
+
+* npm - node package manager
+    * download install npm [from here current latest version](https://www.npmjs.com/get-npm)
+    * make sure it is configured as environment variable and accessible from cmd and close all terminal sessions
+* postgresql - database server
+    * download and install postgresql [from here v.10 is okay](https://www.postgresql.org/)
+    * database, user and postgis information should be configured, check installing part
+    
+### Installing
 
 windows postgis bundle
 http://download.osgeo.org/postgis/windows/pg10/
@@ -29,10 +45,36 @@ CREATE EXTENSION postgis; CREATE EXTENSION hstore;
 - command -> "sh runscript.sh"
 - it will bootstrap backend first then ui in one file. 
 
+> after all third party apps installed like npm and postgresql below command can be run
+> in ROOT
 
-first start spring application from OpenMapValidatorApplication.java
-then start ui from path open-map-validator/src/main/template/map-prj with command "ng serve"
-you need maybe npm install
+OS X & Linux:
 
-- backend url path - localhost:7090
-- ui path - localhost:4210
+```shell
+$ runscript.sh
+```
+
+Windows:
+
+```shell
+$ runscript.bat
+```
+> These commands run backend and frontend applications in two different terminals and
+
+* user interface url path where application runs - [localhost:4210](http://localhost:4210)
+* backend url path - [localhost:7090](https://localhost:7090)
+
+## Built With
+
+* [NodePackageManager](https://www.npmjs.com/) - Web framework package manager
+* [Maven](https://maven.apache.org/) - Dependency Management
+* [Angular](https://angular.io/) - User Interface Framework
+
+## Authors
+
+* **Sanan Ahmadzada** - *Initial work* - [GitHub](https://github.com/sananakhmedov)
+
+## Acknowledgments
+
+* Google has some restrictions for free requests, there are some daily request restrictions.
+If you encounter such a problem, provide a new google places key and replace in the project.

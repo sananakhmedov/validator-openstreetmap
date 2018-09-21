@@ -1,4 +1,7 @@
 echo "This script is about to run another script."
+
+sh ./closescript.sh &
+
 sh ./backendscript.sh &
 echo "Backend Run"
 
