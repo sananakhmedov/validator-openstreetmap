@@ -8,4 +8,5 @@ import java.io.IOException;
 public interface FileHandler {
     String saveFile(MultipartFile file);
     File createTmpFileAndPutContent(String content) throws IOException;
+    void openFileAndOverrideContent(String path, String content) throws IOException;
 }

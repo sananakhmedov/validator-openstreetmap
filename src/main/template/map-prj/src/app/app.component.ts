@@ -138,7 +138,7 @@ export class AppComponent implements OnInit {
       this.dataSourceGoogle.data[1].value = this.numberOfOpenPlaces;
 
       this.dataSource.data[0].value = this.numberOfOpenPlaces - this.numberOfFalseOpen;
-      console.info("false open after statistic : " + this.numberOfFalseOpen);
+      // console.info("false open after statistic : " + this.numberOfFalseOpen);
       this.dataSource.data[1].value = this.numberOfFalseOpen;
 
       this.boolValue = false;
@@ -181,7 +181,9 @@ export class AppComponent implements OnInit {
           var i = 0;
 
           this.numberOfFalseOpen = keys.length;
-          console.info("false open : " + this.numberOfFalseOpen);
+          //
+          //
+          // console.info("false open : " + this.numberOfFalseOpen);
 
           for (let coordinate of keys) {
             //coordinate = 123.3 80.3
@@ -206,7 +208,7 @@ export class AppComponent implements OnInit {
               .replace("@LAT", lat)
               .replace("@LON", lon);
 
-            console.info(openStreetMapLink);
+            // console.info(openStreetMapLink);
 
             marker = new google.maps.Marker({
               position: new google.maps.LatLng(Number(lat), Number(lon)),
@@ -238,10 +240,10 @@ export class AppComponent implements OnInit {
   }
 
   handleStatistic(fileName) {
-    console.info("file : " + fileName);
+    // console.info("file : " + fileName);
     this.demoService.statistic(fileName).subscribe(
       // the first argument is a function which runs on success
-      data => { console.log('check THIS!!' + data); this.statisticData = data
+      data => { /*console.log('check THIS!!' + data);*/ this.statisticData = data
       },
       // the second argument is a function which runs on error
       err => console.error(err),
@@ -265,7 +267,7 @@ export class AppComponent implements OnInit {
     this.demoService.upload(this.fileToUpload).subscribe(
       // the first argument is a function which runs on success
       data => {
-        console.log('check THIS!!' + data);
+        // console.log('check THIS!!' + data);
         this.fileSelected = true;
         this.data = data;
       },

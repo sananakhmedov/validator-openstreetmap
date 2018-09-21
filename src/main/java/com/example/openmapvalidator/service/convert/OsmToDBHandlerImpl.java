@@ -2,19 +2,20 @@ package com.example.openmapvalidator.service.convert;
 
 import com.example.openmapvalidator.helper.ConfigurationService;
 import com.example.openmapvalidator.helper.Const;
-import com.example.openmapvalidator.helper.StreamGobbler;
+import com.example.openmapvalidator.model.PlaceDBModel;
+import com.example.openmapvalidator.service.database.PostgreSQLSelect;
+import com.example.openmapvalidator.service.file.FileHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.concurrent.Executors;
+import java.util.List;
 
 /**
  * @author Sanan.Ahmadzada
@@ -25,22 +26,25 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(OsmToDBHandlerImpl.class);
 
     private final ConfigurationService configurationService;
+    private final PostgreSQLSelect postgreSQLSelect;
+    private final FileHandler fileHandler;
 
-
-    public OsmToDBHandlerImpl(ConfigurationService configurationService) {
+    public OsmToDBHandlerImpl(ConfigurationService configurationService, PostgreSQLSelect postgreSQLSelect,
+                              FileHandler fileHandler) {
         this.configurationService = configurationService;
+        this.postgreSQLSelect = postgreSQLSelect;
+        this.fileHandler = fileHandler;
     }
 
 
     // TODO check if it is okay to handle it in thread
     public void handle(String fileName) {
 
-        long begin = System.currentTimeMillis();
+        //List<PlaceDBModel> list = postgreSQLSelect.selectPlaceDBModel();
+        //LOGGER.info("elements " + Arrays.toString(list.toArray()));
 
         boolean isWindows = System.getProperty(Const.OS_NAME)
                 .toLowerCase().startsWith(Const.OS_WINDOWS_NAME);
-
-        Process process = null;
 
         String OSM_ROOT;
         String root = new File(System.getProperty("user.dir")).getAbsolutePath();
@@ -56,113 +60,91 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
                     File.separator + Const.OSM_STYLE;
 
 
-            ProcessBuilder builder = new ProcessBuilder();
-
-            //builder.command("osm2pgsql", "--create", "--database", "map-db", fileName);
-
-
-            //builder.directory(new ClassPathResource("map").getFile());
-            //builder.directory(new File(System.getProperty("user.dir")));
-
             if (isWindows) {
-                OSM_ROOT = Const.OSM_WINDOWS_ROOT;
-
+                OSM_ROOT = Const.OSM_COMMAND_WINDOWS_ROOT;
                 String path = root + OSM_ROOT;
-
-                //String command = path + File.separator + Const.OSM_COMMAND + ".exe";
                 String command = path + File.separator + Const.OSM_COMMAND;
-                LOGGER.info("command path is : {}", command);
 
+                StringBuilder sb = new StringBuilder()
+                        .append(command)
+                        .append(Const.SPACE)
+                        .append(Const.OSM_COMMAND_CREATE_OPTION)
+                        .append(Const.SPACE)
+                        .append(Const.OSM_COMMAND_DATABASE_OPTION)
+                        .append(Const.SPACE)
+                        .append(configurationService.getOSM_COMMAND_DATABASE_ARGUMENT())
+                        .append(Const.SPACE)
+                        .append(Const.OSM_DEFAULT_STYLE_OPTION)
+                        .append(Const.SPACE)
+                        .append(stylePath)
+                        .append(Const.SPACE)
+                        .append(fileNameWithPath);
 
-                //builder.command(command, "--create", "--database", "map-db", fileNameWithPath);
+                LOGGER.info("command: {}", sb.toString());
 
-                String commandWin = command + " --create --username=postgres --database=map-db " +
-                        " -S " + stylePath + Const.SPACE + fileNameWithPath;
-                LOGGER.info("command win {}", commandWin);
+                fileHandler.openFileAndOverrideContent(root + Const.OSM_BAT_FILE_PATH, sb.toString());
 
-                process = Runtime.getRuntime().exec(commandWin, null, new File(path));
-
-                process.waitFor();
+                executeCommandWithExec(root + Const.OSM_BAT_FILE_PATH);
 
             } else {
 
-                OSM_ROOT = Const.OSM_UNIX_ROOT;
+                OSM_ROOT = Const.OSM_COMMAND_UNIX_ROOT;
 
                 String path = root + OSM_ROOT;
 
-                builder.directory(new File(path));
-
                 String command = path + File.separator + Const.OSM_COMMAND;
-                LOGGER.info("command path is : {}", command);
 
+                StringBuilder sb = new StringBuilder()
+                        .append(command)
+                        .append(Const.SPACE)
+                        .append(Const.OSM_COMMAND_CREATE_OPTION)
+                        .append(Const.SPACE)
+                        .append(Const.OSM_COMMAND_DATABASE_OPTION)
+                        .append(Const.SPACE)
+                        .append(configurationService.getOSM_COMMAND_DATABASE_ARGUMENT())
+                        .append(Const.SPACE)
+                        .append(Const.OSM_DEFAULT_STYLE_OPTION)
+                        .append(Const.SPACE)
+                        .append(stylePath)
+                        .append(Const.SPACE)
+                        .append(fileNameWithPath);
 
-                //builder.command(command, "--create", "--database", "map-db", fileNameWithPath);
-                builder.command(command, "--create", "--database", "map-db", "-S", stylePath,
-                        fileNameWithPath);
+                LOGGER.info("command: {}", sb.toString());
 
-                String[] args = new String[] {command, "--create", "--database", "map-db", "-S", stylePath, fileNameWithPath};
-                Process proc = new ProcessBuilder(args).start();
+                fileHandler.openFileAndOverrideContent(root + Const.OSM_SH_FILE_PATH, sb.toString());
 
-                //String output = executeCommand(command + " --create --database map-db -S " + stylePath + " " +
-                 //       fileNameWithPath + " &");
-
-                //LOGGER.info("output: {}", output);
-
-                //process = builder.start();
+                executeCommandWithExec(root + Const.OSM_SH_FILE_PATH);
 
             }
 
-            LOGGER.info("command: {}", Arrays.toString(builder.command().toArray()));
-
             LOGGER.debug("------");
-
-            /*StreamGobbler streamGobbler =
-                    new StreamGobbler(process.getInputStream(), System.out::println);
-            Executors.newSingleThreadExecutor().submit(streamGobbler);
-            int exitCode = process.waitFor();
-            assert exitCode == 0;
-
-            long end = System.currentTimeMillis();
-
-            LOGGER.info("end osm command runtime in ms : {}", end - begin);*/
 
         } catch (IOException e) {
             System.out.println("exception happened - here's what I know: ");
             e.printStackTrace();
             System.exit(-1);
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } finally {
-//            process.destroy();
         }
     }
 
-    private String executeCommand(String command) {
-
-        StringBuffer output = new StringBuffer();
-
-        Process p = null;
+    private void executeCommandWithExec(String command) {
+        Process p;
         try {
-            p = Runtime.getRuntime().exec(command);
+            String[] cmd = { "sh", command};
+            p = Runtime.getRuntime().exec(cmd);
             p.waitFor();
-            BufferedReader reader =
-                    new BufferedReader(new InputStreamReader(p.getInputStream()));
-
-            String line = "";
-            while ((line = reader.readLine())!= null) {
-                output.append(line + "\n");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    p.getInputStream()));
+            String line;
+            while((line = reader.readLine()) != null) {
+                System.out.println(line);
             }
-
-        } catch (Exception e) {
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
-        } finally {
-            LOGGER.info("destroy");
-            p.destroyForcibly();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-
-        return output.toString();
-
     }
 
 }

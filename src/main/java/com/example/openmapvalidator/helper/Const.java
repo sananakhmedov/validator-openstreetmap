@@ -11,9 +11,13 @@ public class Const {
     public static final String MAP_FOLDER_ROOT = "map";
     public static final String BASH_SCRIPTS_ROOT = ".." + File.separator + ".." + File.separator + ".." + File.separator
             + "bashscript";
-    public static final String OSM_WINDOWS_ROOT = File.separator + "bashscript" + File.separator + "windows" + File
+    public static final String OSM_COMMAND_WINDOWS_ROOT = File.separator + "bashscript" + File.separator + "windows" + File
             .separator + "osm2pgsql-bin";
-    public static final String OSM_UNIX_ROOT = File.separator + "bashscript" + File.separator + "unix" + File.separator + "osm2pgsql-ux";
+    public static final String OSM_COMMAND_UNIX_ROOT = File.separator + "bashscript" + File.separator + "unix" +
+            File.separator + "osm2pgsql-ux";
+
+    public static final String OSM_SH_FILE_PATH = OSM_COMMAND_UNIX_ROOT + File.separator + "osm.sh";
+    public static final String OSM_BAT_FILE_PATH = OSM_COMMAND_WINDOWS_ROOT + File.separator + "osm.bat";
     public static final String OSM_PSQL_PLACE_SELECT_QUERY_IDENTIFIER = "selectPlaces";
     public static final String OSM_PSQL_PLACE_COUNT_QUERY_IDENTIFIER = "countPlaces";
 
