@@ -7,9 +7,10 @@ This project aims to validate openstreetMap places data by comparing with google
 Exported osm map parts can be integrated into our application in order to validate places inside of it and make a
 statistical analyse with them.
 
-![](https://user-images.githubusercontent.com/43131798/45900946-eb72d080-bde9-11e8-9336-dd5f56dae148.PNG)
-
 ![capture](https://user-images.githubusercontent.com/43131798/45902807-5921fb00-bdf0-11e8-8020-fbb689a5bed9.PNG)
+    
+![capture](https://user-images.githubusercontent.com/43131798/45900963-f463a200-bde9-11e8-8b4e-fce3c9f48c73.PNG)
+
 
 ### Prerequisites
 
