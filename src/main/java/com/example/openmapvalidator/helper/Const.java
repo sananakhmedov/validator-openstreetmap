@@ -16,15 +16,23 @@ public class Const {
     public static final String OSM_COMMAND_UNIX_ROOT = File.separator + "bashscript" + File.separator + "unix" +
             File.separator + "osm2pgsql-ux";
 
-    public static final String OSM_SH_FILE_PATH = OSM_COMMAND_UNIX_ROOT + File.separator + "osm.sh";
-    public static final String OSM_BAT_FILE_PATH = OSM_COMMAND_WINDOWS_ROOT + File.separator + "osm.bat";
+    public static final String SHELL_SH_NAME = "osm.sh";
+    public static final String SHELL_BAT_NAME = "osm.bat";
+    public static final String OSM_SH_FILE_PATH = OSM_COMMAND_UNIX_ROOT + File.separator;
+    public static final String OSM_BAT_FILE_PATH = OSM_COMMAND_WINDOWS_ROOT + File.separator;
+    public static final String OSM_BAT_FILE_PATH_WITH_NAME = OSM_COMMAND_WINDOWS_ROOT + File.separator + SHELL_BAT_NAME;
+    public static final String OSM_SH_FILE_PATH_WITH_NAME = OSM_COMMAND_WINDOWS_ROOT + File.separator + SHELL_SH_NAME;
+
     public static final String OSM_PSQL_PLACE_SELECT_QUERY_IDENTIFIER = "selectPlaces";
     public static final String OSM_PSQL_PLACE_COUNT_QUERY_IDENTIFIER = "countPlaces";
 
+
     public static final String OSM_COMMAND = "osm2pgsql";
+    public static final String SHELL_SH_COMMAND = "sh";
+    public static final String SHELL_BAT_COMMAND = "cmd /c";
     public static final String OSM_COMMAND_CREATE_OPTION = "--create";
     public static final String OSM_COMMAND_DATABASE_OPTION = "--database";
-    public static final String OSM_COMMAND_USERNAME_OPTION = "-U";
+    public static final String OSM_COMMAND_USERNAME_OPTION = "--username";
     public static final String OSM_DEFAULT_STYLE_OPTION = "-S";
 
     public static final String LATITUDE = "latitude";

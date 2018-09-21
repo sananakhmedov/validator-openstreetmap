@@ -52,7 +52,6 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
         try {
 
-
             String fileNameWithPath = mapFolderResource.getFile().getAbsolutePath() +
                     File.separator + fileName;
 
@@ -74,6 +73,10 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
                         .append(Const.SPACE)
                         .append(configurationService.getOSM_COMMAND_DATABASE_ARGUMENT())
                         .append(Const.SPACE)
+                        .append(Const.OSM_COMMAND_USERNAME_OPTION)
+                        .append(Const.SPACE)
+                        .append(configurationService.getPSQL_USERNAME())
+                        .append(Const.SPACE)
                         .append(Const.OSM_DEFAULT_STYLE_OPTION)
                         .append(Const.SPACE)
                         .append(stylePath)
@@ -82,9 +85,9 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
                 LOGGER.info("command: {}", sb.toString());
 
-                fileHandler.openFileAndOverrideContent(root + Const.OSM_BAT_FILE_PATH, sb.toString());
+                fileHandler.openFileAndOverrideContent(root + Const.OSM_BAT_FILE_PATH_WITH_NAME, sb.toString());
 
-                executeCommandWithExec(root + Const.OSM_BAT_FILE_PATH);
+                executeCommandWithExec(root + Const.OSM_BAT_FILE_PATH, true);
 
             } else {
 
@@ -111,9 +114,9 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
 
                 LOGGER.info("command: {}", sb.toString());
 
-                fileHandler.openFileAndOverrideContent(root + Const.OSM_SH_FILE_PATH, sb.toString());
+                fileHandler.openFileAndOverrideContent(root + Const.OSM_SH_FILE_PATH_WITH_NAME, sb.toString());
 
-                executeCommandWithExec(root + Const.OSM_SH_FILE_PATH);
+                executeCommandWithExec(root + Const.OSM_SH_FILE_PATH, false);
 
             }
 
@@ -126,11 +129,22 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
         }
     }
 
-    private void executeCommandWithExec(String command) {
+    private void executeCommandWithExec(String pathOfcommand, boolean isWin) {
         Process p;
         try {
-            String[] cmd = { "sh", command};
-            p = Runtime.getRuntime().exec(cmd);
+            String[] cmd = new String[3];
+            if (!isWin) {
+                cmd[0] = Const.SHELL_SH_COMMAND;
+                cmd[1] = pathOfcommand + Const.OSM_SH_FILE_PATH;
+
+                p = Runtime.getRuntime().exec(cmd);
+            } else {
+                String command = Const.SHELL_BAT_COMMAND + Const.SPACE + Const.SHELL_BAT_NAME;
+
+                p = Runtime.getRuntime().exec(command, null, new File(pathOfcommand));
+
+            }
+
             p.waitFor();
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     p.getInputStream()));
