@@ -1,4 +1,4 @@
-# Project Title
+# OpenstreetMap Validator & Statistical Analyse
 
 This project aims to validate openstreetMap places data by comparing with google places and other providers data.
 
