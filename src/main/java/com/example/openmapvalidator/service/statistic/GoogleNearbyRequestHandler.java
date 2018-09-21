@@ -52,9 +52,8 @@ public class GoogleNearbyRequestHandler {
         GoogleResult result = objectMapper.readValue(googleResultStr, GoogleResult.class);
         int count = result.getResults().size();
 
-
-        // TODO https://developers.google.com/places/web-service/search
         /**
+         * https://developers.google.com/places/web-service/search
          *
          * next_page_token contains a token that can be used to return
          * up to 20 additional results. A next_page_token will not be returned

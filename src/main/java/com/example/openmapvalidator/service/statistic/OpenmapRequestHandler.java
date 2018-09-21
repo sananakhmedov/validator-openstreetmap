@@ -29,7 +29,7 @@ public class OpenmapRequestHandler {
 
         SqlSession session = databaseSession.getDBSession();
         Integer count = session.selectOne(Const.OSM_PSQL_PLACE_COUNT_QUERY_IDENTIFIER);
-
+        session.close();
         LOGGER.debug("Openmap statistic request handler returns count : {}", count);
         return count;
     }

@@ -2,7 +2,6 @@ package com.example.openmapvalidator.service.convert;
 
 import com.example.openmapvalidator.helper.ConfigurationService;
 import com.example.openmapvalidator.helper.Const;
-import com.example.openmapvalidator.model.PlaceDBModel;
 import com.example.openmapvalidator.service.database.PostgreSQLSelect;
 import com.example.openmapvalidator.service.file.FileHandler;
 import org.slf4j.Logger;
@@ -10,12 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Repository;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.List;
+import java.io.*;
 
 /**
  * @author Sanan.Ahmadzada
@@ -36,12 +30,7 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
         this.fileHandler = fileHandler;
     }
 
-
-    // TODO check if it is okay to handle it in thread
     public void handle(String fileName) {
-
-        //List<PlaceDBModel> list = postgreSQLSelect.selectPlaceDBModel();
-        //LOGGER.info("elements " + Arrays.toString(list.toArray()));
 
         boolean isWindows = System.getProperty(Const.OS_NAME)
                 .toLowerCase().startsWith(Const.OS_WINDOWS_NAME);
@@ -81,7 +70,8 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
                         .append(Const.SPACE)
                         .append(stylePath)
                         .append(Const.SPACE)
-                        .append(fileNameWithPath);
+                        .append(fileNameWithPath)
+                        .append(Const.SHELL_EXIT_COMMAND);
 
                 LOGGER.info("command: {}", sb.toString());
 
@@ -110,7 +100,8 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
                         .append(Const.SPACE)
                         .append(stylePath)
                         .append(Const.SPACE)
-                        .append(fileNameWithPath);
+                        .append(fileNameWithPath)
+                        .append(Const.SHELL_EXIT_COMMAND);
 
                 LOGGER.info("command: {}", sb.toString());
 
@@ -129,19 +120,46 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
         }
     }
 
-    private void executeCommandWithExec(String pathOfcommand, boolean isWin) {
+    public static void main(String[] args) throws IOException {
+        File myFoo = new File("C:\\dev\\projects\\validator-openstreetmap\\bashscript\\windows\\osm2pgsql-bin\\osm.bat");
+        FileWriter fooWriter = new FileWriter(myFoo, false); // true to append
+        // false to overwrite.
+        String content = "C:\\dev\\projects\\validator-openstreetmap\\bashscript\\windows\\osm2pgsql-bin\\osm2pgsql " +
+                "--create --database map-db --username postgres -S " +
+                "C:\\dev\\projects\\validator-openstreetmap\\target\\classes\\map\\default.style " +
+                "C:\\dev\\projects\\validator-openstreetmap\\target\\classes\\map\\map.osm & exit";
+        fooWriter.write(content);
+        fooWriter.close();
+
+        executeCommandWithExec("C:\\dev\\projects\\validator-openstreetmap\\bashscript\\windows\\osm2pgsql-bin\\",
+                true);
+
+        String content2 = "C:\\dev\\projects\\validator-openstreetmap\\bashscript\\windows\\osm2pgsql-bin\\osm2pgsql " +
+                "--create --database map-db --username postgres -S " +
+                "C:\\dev\\projects\\validator-openstreetmap\\target\\classes\\map\\default.style " +
+                "C:\\dev\\projects\\validator-openstreetmap\\target\\classes\\map\\bostonmap.osm & exit";
+        FileWriter fooWriter2 = new FileWriter(myFoo, false); // true to append
+        fooWriter2.write(content2);
+        fooWriter2.close();
+
+        executeCommandWithExec("C:\\dev\\projects\\validator-openstreetmap\\bashscript\\windows\\osm2pgsql-bin\\",
+                true);
+    }
+
+
+    private static void executeCommandWithExec(String pathOfCommand, boolean isWin) {
         Process p;
         try {
             String[] cmd = new String[3];
             if (!isWin) {
                 cmd[0] = Const.SHELL_SH_COMMAND;
-                cmd[1] = pathOfcommand + Const.OSM_SH_FILE_PATH;
+                cmd[1] = pathOfCommand + Const.OSM_SH_FILE_PATH;
 
                 p = Runtime.getRuntime().exec(cmd);
             } else {
                 String command = Const.SHELL_BAT_COMMAND + Const.SPACE + Const.SHELL_BAT_NAME;
 
-                p = Runtime.getRuntime().exec(command, null, new File(pathOfcommand));
+                p = Runtime.getRuntime().exec(command, null, new File(pathOfCommand));
 
             }
 

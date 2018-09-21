@@ -18,6 +18,7 @@ public class Const {
 
     public static final String SHELL_SH_NAME = "osm.sh";
     public static final String SHELL_BAT_NAME = "osm.bat";
+    public static final String SHELL_EXIT_COMMAND = " & exit";
     public static final String OSM_SH_FILE_PATH = OSM_COMMAND_UNIX_ROOT + File.separator;
     public static final String OSM_BAT_FILE_PATH = OSM_COMMAND_WINDOWS_ROOT + File.separator;
     public static final String OSM_BAT_FILE_PATH_WITH_NAME = OSM_COMMAND_WINDOWS_ROOT + File.separator + SHELL_BAT_NAME;
@@ -29,7 +30,7 @@ public class Const {
 
     public static final String OSM_COMMAND = "osm2pgsql";
     public static final String SHELL_SH_COMMAND = "sh";
-    public static final String SHELL_BAT_COMMAND = "cmd /c";
+    public static final String SHELL_BAT_COMMAND = "cmd /C start /wait";
     public static final String OSM_COMMAND_CREATE_OPTION = "--create";
     public static final String OSM_COMMAND_DATABASE_OPTION = "--database";
     public static final String OSM_COMMAND_USERNAME_OPTION = "--username";

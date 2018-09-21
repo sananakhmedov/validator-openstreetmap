@@ -50,7 +50,6 @@ public class PostgreSQLSelect {
             stmt.close();
             PostgreSQLJDBC.getConnection().close();
 
-            // TODO sanan connection close
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName()+": "+ e.getMessage() );
             System.exit(0);
