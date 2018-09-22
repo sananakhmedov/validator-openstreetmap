@@ -1,2 +1,3 @@
 cd bashscript/unix
-./runscript.sh & exit
+./runscript.sh
+exit

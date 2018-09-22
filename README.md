@@ -33,6 +33,11 @@ statistical analyse with them.
     $ in src/main/resources/mybatis/config.xml
     $ <property name="password" value="postgres" />
     ```
+* In order to run application osm file from [openstreetmap](https://www.openstreetmap.org/export#map=18/48.20816/16.37301)
+should be exported, there are also some default map files inside;
+    ```shell
+    $ in src/main/resources/map
+    ```
 
 ### Installing
 
@@ -57,18 +62,18 @@ $ <as Admin>
 $ C:\Program Files\PostgreSQL\10\bin\psql -U postgres
 ```
 
-OS X & Linux:
-
-```shell
-$ runscript.sh
-```
-
-
 windows postgis bundle
 http://download.osgeo.org/postgis/windows/pg10/
- 
+
+OS X & Linux:
+
 for mac
 brew install postgis
+
+> after postgis is installed below extensions should be run inside of "map-db" database.
+```shell
+$ CREATE EXTENSION postgis; CREATE EXTENSION hstore;
+```
 
 psql -U postgres
 CREATE DATABASE "map-db";
@@ -77,10 +82,6 @@ CREATE DATABASE "map-db";
 
 CREATE EXTENSION postgis; CREATE EXTENSION hstore;
 
-
- - http://download.osgeo.org/postgis/windows/pg10/ postgis should be installed
-    and "CREATE EXTENSION postgis; CREATE EXTENSION hstore;" those extensions should be
-    run inside of "map-db" database.
 
 > after all third party apps installed like npm and postgresql below command can be run
 > in ROOT
