@@ -20,13 +20,11 @@ public class OsmToDBHandlerImpl implements OsmToDBHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(OsmToDBHandlerImpl.class);
 
     private final ConfigurationService configurationService;
-    private final PostgreSQLSelect postgreSQLSelect;
     private final FileHandler fileHandler;
 
-    public OsmToDBHandlerImpl(ConfigurationService configurationService, PostgreSQLSelect postgreSQLSelect,
+    public OsmToDBHandlerImpl(ConfigurationService configurationService,
                               FileHandler fileHandler) {
         this.configurationService = configurationService;
-        this.postgreSQLSelect = postgreSQLSelect;
         this.fileHandler = fileHandler;
     }
 

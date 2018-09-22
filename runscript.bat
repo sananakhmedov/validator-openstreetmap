@@ -1,2 +1,2 @@
 cd bashscript/windows
-runscript.bat
+runscript.bat & exit

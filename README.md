@@ -16,12 +16,42 @@ statistical analyse with them.
 
 * npm - node package manager
     * download install npm [from here current latest version](https://www.npmjs.com/get-npm)
-    * make sure it is configured as environment variable and accessible from cmd and close all terminal sessions
+    * make sure it is configured as environment variable and accessible from cmd and restart all terminal sessions
 * postgresql - database server
     * download and install postgresql [from here v.10 is okay](https://www.postgresql.org/)
     * database, user and postgis information should be configured, check installing part
     
 ### Installing
+
+> after postgresql server installed and in running state with following commands new database
+> should be created.
+
+```shell
+$ psql -U postgres
+```
+> In case of psql command is not in environment variable.
+
+Windows:
+> for win its in program_files/postgresql/bin run psql command in the following path,
+> in order to run user postgres without password go into and change all md5 to trust
+> at the bottom of the file.
+ 
+```shell
+$ PostgreSQL\10\data\pg_hba.conf
+```
+
+> after changes saved, without password psql command works, open shell with admin privileges
+```shell
+$ <as Admin>
+$ C:\Program Files\PostgreSQL\10\bin\psql -U postgres
+```
+
+OS X & Linux:
+
+```shell
+$ runscript.sh
+```
+
 
 windows postgis bundle
 http://download.osgeo.org/postgis/windows/pg10/
@@ -30,9 +60,9 @@ for mac
 brew install postgis
 
 psql -U postgres
-CREATE DATABASE "map-database";
+CREATE DATABASE "map-db";
 
-\c map-database;
+\c map-db;
 
 CREATE EXTENSION postgis; CREATE EXTENSION hstore;
 
@@ -40,10 +70,6 @@ CREATE EXTENSION postgis; CREATE EXTENSION hstore;
  - http://download.osgeo.org/postgis/windows/pg10/ postgis should be installed
     and "CREATE EXTENSION postgis; CREATE EXTENSION hstore;" those extensions should be
     run inside of "map-db" database.
-
-- if you are using linux machine or unix based system just run runscript.sh file
-- command -> "sh runscript.sh"
-- it will bootstrap backend first then ui in one file. 
 
 > after all third party apps installed like npm and postgresql below command can be run
 > in ROOT
@@ -61,7 +87,7 @@ $ runscript.bat
 ```
 > These commands run backend and frontend applications in two different terminals and
 
-* user interface url path where application runs - [localhost:4210](http://localhost:4210)
+* user interface url path where application runs, open and start validation - [localhost:4210](http://localhost:4210)
 * backend url path - [localhost:7090](https://localhost:7090)
 
 ## Built With

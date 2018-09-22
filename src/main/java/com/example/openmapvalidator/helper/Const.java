@@ -30,7 +30,7 @@ public class Const {
 
     public static final String OSM_COMMAND = "osm2pgsql";
     public static final String SHELL_SH_COMMAND = "sh";
-    public static final String SHELL_BAT_COMMAND = "cmd /C start /wait";
+    public static final String SHELL_BAT_COMMAND = "cmd /B /C start /wait";
     public static final String OSM_COMMAND_CREATE_OPTION = "--create";
     public static final String OSM_COMMAND_DATABASE_OPTION = "--database";
     public static final String OSM_COMMAND_USERNAME_OPTION = "--username";
