@@ -1,1 +1,1 @@
-C:\dev\projects\validator-openstreetmap\bashscript\windows\osm2pgsql-bin\osm2pgsql --create --database map-db --username postgres -S C:\dev\projects\validator-openstreetmap\target\classes\map\default.style C:\dev\projects\validator-openstreetmap\target\classes\map\wienstatsop.osm & exit
+C:\dev\projects\validator-openstreetmap\bashscript\windows\osm2pgsql-bin\osm2pgsql --create --database map-db --username postgres -S C:\dev\projects\validator-openstreetmap\target\classes\map\default.style C:\dev\projects\validator-openstreetmap\target\classes\map\Vienna-stephan.osm & exit

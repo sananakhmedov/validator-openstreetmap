@@ -48,9 +48,11 @@ should be exported, there are also some default map files inside;
 > In case of psql command is not in environment variable.
 
 Windows:
-> for win its in program_files/postgresql/bin run psql command in the following path,
-> in order to run user postgres without password go into and change all md5 to trust
-> at the bottom of the file.
+
+> For win its in program_files/postgresql/bin run psql command in the following path,
+> If you want to run user postgres without password go into and change all md5 to trust
+> at the bottom of the file. And also postgis bundle should be installed 
+[from here](http://download.osgeo.org/postgis/windows/pg10/)
  
 ```shell
 $ PostgreSQL\10\data\pg_hba.conf
@@ -62,26 +64,24 @@ $ <as Admin>
 $ C:\Program Files\PostgreSQL\10\bin\psql -U postgres
 ```
 
-windows postgis bundle
-http://download.osgeo.org/postgis/windows/pg10/
-
 OS X & Linux:
 
 for mac
-brew install postgis
 
-> after postgis is installed below extensions should be run inside of "map-db" database.
 ```shell
-$ CREATE EXTENSION postgis; CREATE EXTENSION hstore;
+$ brew install postgis
 ```
 
-psql -U postgres
-CREATE DATABASE "map-db";
-
-\c map-db;
-
-CREATE EXTENSION postgis; CREATE EXTENSION hstore;
-
+For All
+> and change password with following command inside psql terminal;
+> after postgis is installed below extensions should be run inside of "map-db" database.
+```shell
+$ <as Admin>
+$ ALTER USER postgres PASSWORD '';
+$ CREATE DATABASE 'map-db';  // create a database named map-db
+$ \c map-db;   // and go inside to install extensions
+$ CREATE EXTENSION postgis; CREATE EXTENSION hstore;
+```
 
 > after all third party apps installed like npm and postgresql below command can be run
 > in ROOT
@@ -107,6 +107,7 @@ $ runscript.bat
 * [NodePackageManager](https://www.npmjs.com/) - Web framework package manager
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Angular](https://angular.io/) - User Interface Framework
+* [osm2pgsql](https://github.com/openstreetmap/osm2pgsql) - Openstreetmap data to postgresql
 
 ## Authors
 
@@ -115,4 +116,14 @@ $ runscript.bat
 ## Acknowledgments
 
 * Google has some restrictions for free requests, there are some daily request restrictions.
-If you encounter such a problem, provide a new google places key and replace in the project.
+If you encounter such a problem, provide a new google and other third party providers places key and replace in the project.
+* And microsoft api is right now available only for USA. They will announce the extension in further years.
+* All key places are;
+    * ```shell
+      $ src/main/resources/config.properties
+      $ pom.xml
+      ```
+* URL's for getting keys;
+    * https://console.cloud.google.com/google/maps-apis
+    * http://dev.virtualearth.net/REST/v1
+    * https://developer.foursquare.com/  
