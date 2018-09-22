@@ -20,15 +20,26 @@ statistical analyse with them.
 * postgresql - database server
     * download and install postgresql [from here v.10 is okay](https://www.postgresql.org/)
     * database, user and postgis information should be configured, check installing part
+    * while installing psql password can be chosen, in application default password is 'postgres' if you choose another one
+    two places inside application should be altered. 
     
+    > First one 
+    ```shell
+    $ in src/main/resources/application.properties
+    $ spring.datasource.password = postgres
+    ```
+    > Second one 
+    ```shell
+    $ in src/main/resources/mybatis/config.xml
+    $ <property name="password" value="postgres" />
+    ```
+
 ### Installing
 
 > after postgresql server installed and in running state with following commands new database
 > should be created.
 
-```shell
-$ psql -U postgres
-```
+
 > In case of psql command is not in environment variable.
 
 Windows:
