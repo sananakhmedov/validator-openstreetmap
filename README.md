@@ -108,6 +108,7 @@ $ runscript.bat
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Angular](https://angular.io/) - User Interface Framework
 * [osm2pgsql](https://github.com/openstreetmap/osm2pgsql) - Openstreetmap data to postgresql
+* [postgis](https://www.postgresql.org/) - postgis map extension for pgsql 
 
 ## Authors
 
@@ -122,6 +123,7 @@ If you encounter such a problem, provide a new google and other third party prov
     * ```shell
       $ src/main/resources/config.properties
       $ pom.xml
+      $ src/main/template/map-prj/src/index.html
       ```
 * URL's for getting keys;
     * https://console.cloud.google.com/google/maps-apis
