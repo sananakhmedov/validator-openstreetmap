@@ -51,7 +51,8 @@ Windows:
 
 > For win its in program_files/postgresql/bin run psql command in the following path,
 > If you want to run user postgres without password go into and change all md5 to trust
-> at the bottom of the file. And also postgis bundle should be installed 
+> at the bottom of the file. Than its possible to change password as empty.
+> And also postgis bundle should be installed 
 [from here](http://download.osgeo.org/postgis/windows/pg10/)
  
 ```shell
@@ -77,7 +78,7 @@ For All
 > after postgis is installed below extensions should be run inside of "map-db" database.
 ```shell
 $ <as Admin>
-$ ALTER USER postgres PASSWORD '';
+$ ALTER USER postgres PASSWORD '';  //change password as empty
 $ CREATE DATABASE 'map-db';  // create a database named map-db
 $ \c map-db;   // and go inside to install extensions
 $ CREATE EXTENSION postgis; CREATE EXTENSION hstore;
