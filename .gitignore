@@ -28,3 +28,7 @@
 /.nb-gradle/
 /package-lock.json
 /test.xml
+
+### Osm related ###
+bashscript/windows/osm2pgsql-bin/osm.bat
+bashscript/unix/osm2pgsql-ux/osm.sh

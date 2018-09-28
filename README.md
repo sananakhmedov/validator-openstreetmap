@@ -18,7 +18,7 @@ statistical analyse with them.
     * download install npm [from here current latest version](https://www.npmjs.com/get-npm)
     * make sure it is configured as environment variable and accessible from cmd and restart all terminal sessions
 * postgresql - database server
-    * download and install postgresql [from here v.10 is okay](https://www.postgresql.org/)
+    * download and install postgresql from graphical interface section [from here v.10 is okay](https://www.postgresql.org/)
     * database, user and postgis information should be configured, check installing part
     * while installing psql password can be chosen, in application default password is 'postgres' if you choose another one
     two places inside application should be altered. 
@@ -52,14 +52,13 @@ Windows:
 > For win its in program_files/postgresql/bin run psql command in the following path,
 > If you want to run user postgres without password go into and change all md5 to trust
 > at the bottom of the file. Than its possible to change password as empty.
-> And also postgis bundle should be installed 
-[from here](http://download.osgeo.org/postgis/windows/pg10/)
  
 ```shell
 $ PostgreSQL\10\data\pg_hba.conf
 ```
 
-> after changes saved, without password psql command works, open shell with admin privileges
+> after changes saved, without password psql command works, and also postgis bundle should be installed 
+> [from here](http://download.osgeo.org/postgis/windows/pg10/) open shell with admin privileges
 ```shell
 $ <as Admin>
 $ C:\Program Files\PostgreSQL\10\bin\psql -U postgres
@@ -78,7 +77,7 @@ For All
 > after postgis is installed below extensions should be run inside of "map-db" database.
 ```shell
 $ <as Admin>
-$ ALTER USER postgres PASSWORD '';  //change password as empty
+$ ALTER USER postgres PASSWORD '';  //change password as empty if you want to use default project settings
 $ CREATE DATABASE 'map-db';  // create a database named map-db
 $ \c map-db;   // and go inside to install extensions
 $ CREATE EXTENSION postgis; CREATE EXTENSION hstore;
