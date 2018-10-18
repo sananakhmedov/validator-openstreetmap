@@ -8,7 +8,7 @@ Exported osm map parts can be integrated into our application in order to valida
 statistical analyse with them.
 
 ![capture](https://user-images.githubusercontent.com/43131798/45902807-5921fb00-bdf0-11e8-8020-fbb689a5bed9.PNG)
-    
+
 ![capture](https://user-images.githubusercontent.com/43131798/45900963-f463a200-bde9-11e8-8b4e-fce3c9f48c73.PNG)
 
 
@@ -18,17 +18,17 @@ statistical analyse with them.
     * download install npm [from here current latest version](https://www.npmjs.com/get-npm)
     * make sure it is configured as environment variable and accessible from cmd and restart all terminal sessions
 * postgresql - database server
-    * download and install postgresql from graphical interface section [from here v.10 is okay](https://www.postgresql.org/)
+    * download and install postgresql [from here v.10 is okay](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads)
     * database, user and postgis information should be configured, check installing part
-    * while installing psql password can be chosen, in application default password is 'postgres' if you choose another one
-    two places inside application should be altered. 
-    
-    > First one 
+    * while installing psql password can be chosen, in application default password is NONE '' if you choose another one
+    two places inside application should be altered, on installing part below shown how to set empty password, in some application installation while installing postgresql password is mandatory choose password there and after change it.
+
+    > First one
     ```shell
     $ in src/main/resources/application.properties
     $ spring.datasource.password = postgres
     ```
-    > Second one 
+    > Second one
     ```shell
     $ in src/main/resources/mybatis/config.xml
     $ <property name="password" value="postgres" />
@@ -50,18 +50,18 @@ should be exported, there are also some default map files inside;
 Windows:
 
 > For win its in program_files/postgresql/bin run psql command in the following path,
-> If you want to run user postgres without password go into and change all md5 to trust
+> If you want to run user postgres without password go into and change all **md5** to **trust**
 > at the bottom of the file. Than its possible to change password as empty.
- 
+
 ```shell
 $ PostgreSQL\10\data\pg_hba.conf
 ```
 
-> after changes saved, without password psql command works, and also postgis bundle should be installed 
+> after changes saved, without password psql command works, and also postgis bundle exe should be installed in PostgreSql/pg10 folder with yes to all changes.
 > [from here](http://download.osgeo.org/postgis/windows/pg10/) open shell with admin privileges
 ```shell
 $ <as Admin>
-$ C:\Program Files\PostgreSQL\10\bin\psql -U postgres
+$ <PostgreRoot>\10\bin\psql -U postgres
 ```
 
 OS X & Linux:
@@ -78,7 +78,7 @@ For All
 ```shell
 $ <as Admin>
 $ ALTER USER postgres PASSWORD '';  //change password as empty if you want to use default project settings
-$ CREATE DATABASE 'map-db';  // create a database named map-db
+$ CREATE DATABASE "map-db";  // create a database named map-db
 $ \c map-db;   // and go inside to install extensions
 $ CREATE EXTENSION postgis; CREATE EXTENSION hstore;
 ```
@@ -108,7 +108,7 @@ $ runscript.bat
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [Angular](https://angular.io/) - User Interface Framework
 * [osm2pgsql](https://github.com/openstreetmap/osm2pgsql) - Openstreetmap data to postgresql
-* [postgis](https://www.postgresql.org/) - postgis map extension for pgsql 
+* [postgis](https://www.postgresql.org/) - postgis map extension for pgsql
 
 ## Authors
 
