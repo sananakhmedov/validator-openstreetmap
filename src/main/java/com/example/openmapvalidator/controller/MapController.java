@@ -39,7 +39,6 @@ public class MapController {
     public Map<String, Integer> statisticValues(@RequestParam String fileName) {
 
         return statisticHandler.handle(fileName);
-        //return mockStatisticData();
     }
 
     @PostMapping
@@ -55,10 +54,12 @@ public class MapController {
         logger.debug(gson.toJson(map));
 
         return map;
-
-        //return mockData();
     }
 
+    /**
+     * testing purposes
+     * @return
+     */
     private Map<String, Integer> mockStatisticData() {
         String json = "{\"numOfGooglePlaces\":8,\"numOfOpenstreetMapPlaces\":7}";
         // convert JSON string to Map
@@ -66,6 +67,10 @@ public class MapController {
         return gson.fromJson(json, type);
     }
 
+    /**
+     * testing purposes added no business functionality
+     * @return mock of string map
+     */
     private Map<String, Map<String, String>> mockData() {
         String json = "{\"48.1800796,16.3276520\":{\"foursquare\":\"NULL\",\"google\":\"Tiefgarage " +
                 "F\u00FCchselhofpark\",\"openstreet\":\"F\u00FCchselhofparkgarage\"},\"48.1792934," +

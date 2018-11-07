@@ -1,1 +1,0 @@
-/Users/bk/Desktop/projects/validator-openstreetmap/bashscript/unix/osm2pgsql-ux/osm2pgsql --create --database map-db -S /Users/bk/Desktop/projects/validator-openstreetmap/target/classes/map/default.style /Users/bk/Desktop/projects/validator-openstreetmap/target/classes/map/istinye.osm

@@ -78,7 +78,7 @@ public class MapPlacesValidationHandler {
             List<PlaceDBModel> list = session.selectList(Const.OSM_PSQL_PLACE_SELECT_QUERY_IDENTIFIER);
 
             session.close();
-            LOGGER.debug("list of osm db places elements"); //ok i got 9 eleemnt from db which is correct i got data
+            LOGGER.debug("list of osm db places elements");
 
             LOGGER.debug(Arrays.toString(list.toArray()));
 

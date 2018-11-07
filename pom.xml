@@ -160,6 +160,12 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.sh</include>
+                    <include>**/*.style</include>
+                </includes>
             </resource>
         </resources>
     </build>

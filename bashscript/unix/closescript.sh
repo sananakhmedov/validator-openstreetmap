@@ -1,1 +1,1 @@
-kill -9 $(lsof -t -i:7090 -sTCP:LISTEN) & kill -9 $(lsof -t -i:4210 -sTCP:LISTEN)
+kill $(lsof -i :4210 | grep LISTEN) & kill $(lsof -i :7090 | grep LISTEN)

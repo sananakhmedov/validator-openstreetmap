@@ -41,8 +41,10 @@ public class FileHandlerImpl implements FileHandler {
     @Override
     public void openFileAndOverrideContent(String path, String content) throws IOException {
         File myFoo = new File(path);
+        myFoo.setExecutable(true);
+        myFoo.setReadable(true);
+        myFoo.setWritable(true);
         FileWriter fooWriter = new FileWriter(myFoo, false); // true to append
-        // false to overwrite.
         fooWriter.write(content);
         fooWriter.close();
     }
